@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en" style="width: 100%;height:100%;" id="html">
 
@@ -508,7 +509,7 @@
 
 </head>
 
-<body id="body">
+<body id="body"> <!-- BODY!!! -->
     <div class="preloader">
         <!-- <svg class="preloader__image" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
           <path id="text1" fill="var(--icon-color)"
@@ -568,7 +569,8 @@
                 <div id="connectjsplugin" style="display: block;margin: 8px;cursor: pointer;">Подключить JS-плагин (путь к файлу)...</div>
                 <input type="file" id="importjsplugin" onchange="readJSPlugin(this)"><label for="importjsplugin"
                     style="display: inline-block;margin: 8px;cursor: pointer;">Импортировать плагин...</label>
-                <div id="jspluginslist" style="display: block;margin: 8px;cursor: pointer;">Подключенные плагины</div>
+                <div id="jspluginsonline" style="display: block;margin: 8px;cursor: pointer;margin-bottom:16px">Плагины онлайн</div>
+<div id="jspluginslist" style="display: block;margin: 8px;cursor: pointer;">Подключенные плагины</div>
             </div>
 
 
@@ -856,7 +858,7 @@
             </svg>
         </div>
         <div id="canyonAudio_main">
-            <audio controls loop style="width: 98%;" src=""></audio>
+            <audio controls loop style="width: 98%;" src=""></audio> <!-- canyon.mid from windows 3.1 should be here, but i removed it because it was too big -->
         </div>
     </div>
 </div>
@@ -1019,6 +1021,32 @@
                 <button class="save">Сохранить</button>
                 <button class="cancelsave">Отмена</button>
 
+            </div>
+        </div>
+    </div>
+
+
+    <div id="pluginsonline_cont">
+        <div id="pluginsonline">
+            <div id="pluginsonline_header">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" viewBox="0 0 512 512">
+                    <path
+                        d="M380.93 57.37A32 32 0 00358.3 48H94.22A46.21 46.21 0 0048 94.22v323.56A46.21 46.21 0 0094.22 464h323.56A46.36 46.36 0 00464 417.78V153.7a32 32 0 00-9.37-22.63zM256 416a64 64 0 1164-64 63.92 63.92 0 01-64 64zm48-224H112a16 16 0 01-16-16v-64a16 16 0 0116-16h192a16 16 0 0116 16v64a16 16 0 01-16 16z"
+                        stroke="var(--icon-color)" stroke-linecap="round" stroke-linejoin="round"
+                        fill="var(--icon-color)" stroke-width="32" />
+                </svg> <!-- TODO: replace icon -->
+                <span
+                    style="font-family: Arial;font-weight:600; color:var(--icon-color);position: absolute;top: 5px;">Плагины онлайн</span><svg viewBox="0 0 512 512" width="24" style="position: absolute;top: 0;right:5px"
+                    id="pluginsonlineclose1">
+                    <path fill="none" stroke="var(--close-color)" stroke-linecap="round" stroke-linejoin="round"
+                        stroke-width="32" d="M368 368L144 144M368 144L144 368" />
+                </svg>
+            </div>
+            <div id="pluginsonline_main">
+                <input type="text" id="pluginsearch" placeholder="Поиск">
+<ul id="onlinepluginslist" style="list-style-type:none">
+<li>Загрузка</li>
+</ul>
             </div>
         </div>
     </div>
@@ -1444,7 +1472,7 @@
             padding: 0
         }
 
-        #settings_cont, #connectedplugins_cont, #newfileconfirm, #savedialog_cont, #connectplugindialog_cont, #about_wnd_cont, #canyonAudio_cont, #connectplugindialog_cont {
+        #settings_cont, #connectedplugins_cont, #newfileconfirm, #savedialog_cont, #connectplugindialog_cont, #about_wnd_cont, #canyonAudio_cont, #connectplugindialog_cont, #pluginsonline_cont {
             position: absolute;
             z-index: -1;
             top: 0;
@@ -1456,7 +1484,7 @@
 
         }
 
-        #settings_main, #connectedplugins_main {
+        #settings_main, #connectedplugins_main, #pluginsonline_main {
             position: absolute;
             width: calc(100% - 5px);
             height: calc(100% - 85px);
@@ -1544,7 +1572,7 @@
             box-shadow: var(--shadow) var(--border-textarea);
         }
 
-        #settings {
+        #settings, #pluginsonline {
             position: absolute;
             top: calc(50vh - 175px);
             left: calc(50vw - 230px);
@@ -1564,7 +1592,7 @@
 @media (min-width: 349.98px) {}                @media (min-width: 449.98px) {}@media (min-width: 549.98px) {}  @media (min-width: 649.98px) {}   @media (min-width: 749.98px) {}@media (min-width: 849.98px) {}@media (min-width: 949.98px) {}@media (min-width: 1049.98px) {}   @media (min-width: 549.98px) and (max-width:649.98px) {}@media (min-width: 649.98px) and (max-width:749.98px) {}@media (min-width: 749.98px) and (max-width:849.98px) {}@media (min-width: 949.98px) and (max-width:1049.98px) {} */
 
         @media (max-width: 499.98px) {
-            #settings {
+            #settings, #pluginsonline {
                 position: absolute;
                 top: 10px;
                 left: 10px;
@@ -1575,7 +1603,7 @@
         }
 
         @media (max-height: 499.98px) {
-            #settings {
+            #settings, #pluginsonline {
                 position: absolute;
                 top: 10px;
                 left: 10px;
@@ -2459,7 +2487,7 @@ window.addEventListener('beforeprint', update_print_content)
             pluginscript.onload = () => {
                 pluginslistinnerhtml = '<ul id="plgns_ul">';
                     for(var currentplugin = 0; currentplugin < plugins.length; currentplugin++) {
-            pluginslistinnerhtml += `<li onclick="pluginnames = delMsvElem(['`+pluginnames+`'], '`+pluginnames[currentplugin]+`'); plugins = delMsvElem(['`+plugins+`'], '`+plugins[currentplugin]+`');remScript('`+plugins[currentplugin]+`');localStorage.setItem('plugins', JSON.stringify(plugins));this.remove(); if(plgns_ul.innerHTML==''){ noplgns.style.display = 'block'}; errors_connected.innerHTML = 'Для применения изменений требуется обновление страницы <button onclick=\\'location.reload();\\'>обновить страницу</button>'"><p style="font-size:18px">` + pluginnames[currentplugin] + `</p><p style="font-size:14px">` + (plugins[currentplugin].startsWith('data:text/javascript;base64,') ? 'Через файл' : plugins[currentplugin]) + `</p></li>`
+            pluginslistinnerhtml += `<li onclick="pluginnames = delMsvElem(['`+pluginnames+`'], '`+pluginnames[currentplugin]+`'); plugins = delMsvElem(['`+plugins+`'], '`+plugins[currentplugin]+`');remScript('`+plugins[currentplugin]+`', ${/https?:\/\/api\.github\.com/.test(plugins[currentplugin])});localStorage.setItem('plugins', JSON.stringify(plugins));this.remove(); if(plgns_ul.innerHTML==''){ noplgns.style.display = 'block'}; errors_connected.innerHTML = 'Для применения изменений требуется обновление страницы <button onclick=\\'location.reload();\\'>обновить страницу</button>'"><p style="font-size:18px">` + pluginnames[currentplugin] + `</p><p style="font-size:14px">` + (plugins[currentplugin].startsWith('data:text/javascript;base64,') ? 'Через файл' : plugins[currentplugin]) + `</p></li>`
         };pluginslistinnerhtml += '</ul>';
         connectedPluginsUlElementContainer.innerHTML = pluginslistinnerhtml;
     if(plgns_ul.innerHTML==''){
@@ -2842,7 +2870,7 @@ connectplugindialog.style.zIndex = '120';
             pluginscript.onload = () => {
                 pluginslistinnerhtml = '<ul id="plgns_ul">';
                     for(var currentplugin = 0; currentplugin < plugins.length; currentplugin++) {
-            pluginslistinnerhtml += `<li onclick="pluginnames = delMsvElem(['`+pluginnames+`'], '`+pluginnames[currentplugin]+`'); plugins = delMsvElem(['`+plugins+`'], '`+plugins[currentplugin]+`');remScript('`+plugins[currentplugin]+`');localStorage.setItem('plugins', JSON.stringify(plugins));this.remove(); if(plgns_ul.innerHTML==''){ noplgns.style.display = 'block'}; errors_connected.innerHTML = 'Для применения изменений требуется обновление страницы <button onclick=\\'location.reload();\\'>обновить страницу</button>'"><p style="font-size:18px">` + pluginnames[currentplugin] + `</p><p style="font-size:14px">` + (plugins[currentplugin].startsWith('data:text/javascript;base64,') ? 'Через файл' : plugins[currentplugin]) + `</p></li>`;
+            pluginslistinnerhtml += `<li onclick="pluginnames = delMsvElem(['`+pluginnames+`'], '`+pluginnames[currentplugin]+`'); plugins = delMsvElem(['`+plugins+`'], '`+plugins[currentplugin]+`');remScript('`+plugins[currentplugin]+`', ${/https?:\/\/api\.github\.com/.test(plugins[currentplugin])});localStorage.setItem('plugins', JSON.stringify(plugins));this.remove(); if(plgns_ul.innerHTML==''){ noplgns.style.display = 'block'}; errors_connected.innerHTML = 'Для применения изменений требуется обновление страницы <button onclick=\\'location.reload();\\'>обновить страницу</button>'"><p style="font-size:18px">` + pluginnames[currentplugin] + `</p><p style="font-size:14px">` + (plugins[currentplugin].startsWith('data:text/javascript;base64,') ? 'Через файл' : plugins[currentplugin]) + `</p></li>`;
         };pluginslistinnerhtml += '</ul>';
         connectedPluginsUlElementContainer.innerHTML = pluginslistinnerhtml;
     if(plgns_ul.innerHTML==''){
@@ -2865,6 +2893,17 @@ connectplugindialog.style.zIndex = '120';
 
 
         }
+
+
+
+
+async function loadonlineplugin(url, pscript){
+let resp = await fetch(url);
+let res = await resp.json();
+let resurl = res.content;
+pscript.src = 'data:text/javasript;base64,'+resurl;
+pscript.setAttribute('online-url', url);
+}
         if(localStorage.getItem('plugins')!=null) {
 
             
@@ -2885,14 +2924,20 @@ connectplugindialog.style.zIndex = '120';
   result.push(el);
 });*/
             for(let i = 0; i < plugins.length; i++) {
+
                 var pluginscript = document.createElement('script');
-                pluginscript.src = plugins[i];
+if(/^https?:\/\/api\.github\.com/.test(plugins[i])) {
+
+loadonlineplugin(plugins[i], pluginscript);
+
+} else {
+                pluginscript.src = plugins[i];}
                 
                 body.append(pluginscript);
                 pluginscript.onload = () => {
                 pluginslistinnerhtml = '<ul id="plgns_ul">';
                     for(var currentplugin = 0; currentplugin < plugins.length; currentplugin++) {
-            pluginslistinnerhtml += `<li onclick="pluginnames = delMsvElem(['`+pluginnames+`'], '`+pluginnames[currentplugin]+`'); plugins = delMsvElem(['`+plugins+`'], '`+plugins[currentplugin]+`');remScript('`+plugins[currentplugin]+`');localStorage.setItem('plugins', JSON.stringify(plugins));this.remove(); if(plgns_ul.innerHTML==''){ noplgns.style.display = 'block'}; errors_connected.innerHTML = 'Для применения изменений требуется обновление страницы <button onclick=\\'location.reload();\\'>обновить страницу</button>'"><p style="font-size:18px">` + pluginnames[currentplugin] + `</p><p style="font-size:14px">` + (plugins[currentplugin].startsWith('data:text/javascript;base64,') ? 'Через файл' : plugins[currentplugin]) + `</p></li>`;
+            pluginslistinnerhtml += `<li onclick="pluginnames = delMsvElem(['`+pluginnames+`'], '`+pluginnames[currentplugin]+`'); plugins = delMsvElem(['`+plugins+`'], '`+plugins[currentplugin]+`');remScript('`+plugins[currentplugin]+`', ${/https?:\/\/api\.github\.com/.test(plugins[currentplugin])});localStorage.setItem('plugins', JSON.stringify(plugins));this.remove(); if(plgns_ul.innerHTML==''){ noplgns.style.display = 'block'}; errors_connected.innerHTML = 'Для применения изменений требуется обновление страницы <button onclick=\\'location.reload();\\'>обновить страницу</button>'"><p style="font-size:18px">` + pluginnames[currentplugin] + `</p><p style="font-size:14px">` + (plugins[currentplugin].startsWith('data:text/javascript;base64,') ? 'Файл' : (plugins[currentplugin].startsWith('https://api.github.com') ? 'Онлайн' : plugins[currentplugin])) + `</p></li>`;
         };pluginslistinnerhtml += '</ul>';
         connectedPluginsUlElementContainer.innerHTML = pluginslistinnerhtml;
     if(plgns_ul.innerHTML==''){
@@ -2906,7 +2951,6 @@ connectplugindialog.style.zIndex = '120';
 
         }
 
-        
 /*
 localStorage.setItem(array, JSON.stringify(array));
 array = JSON.parse(localStorage.getItem("array"));
@@ -2914,7 +2958,7 @@ array = JSON.parse(localStorage.getItem("array"));
 console.log(typeof array); // объект
 console.log(array); // [1, 2, 3]
 */
-var versionString = '1.6.2 (ru)'
+var versionString = '1.7 (ru)';
 
         var cancelconnecting = document.querySelector('.cancelconnecting');
         cancelconnecting.onclick = () => {
@@ -2942,7 +2986,7 @@ var versionString = '1.6.2 (ru)'
 
 
 
-       thereisabuttonconnectpluginiftherearentanyconnectedplugins.onclick = () =>{
+       thereisabuttonconnectpluginiftherearentanyconnectedplugins.onclick = () =>{ // idk why so long id
         connectplugindialog_cont.style.display = 'block';
 
 connectplugindialog.style.display = 'block';
@@ -3001,8 +3045,8 @@ connectedplugins.style.zIndex = '120';
         function delMsvElem(msv, elToRemove) {
             return msv.filter(fltr => fltr != elToRemove);
         }
-        function remScript(srcAttrib) {
-            document.querySelector('script[src="'+srcAttrib+'"]').remove();
+        function remScript(srcAttrib, isOnline) {
+            document.querySelector(`script[${isOnline?'online-url':'src'}="${srcAttrib}"]`).remove();
         }
         jspluginslist.addEventListener('click', ()=>{
 
@@ -3012,7 +3056,7 @@ connectedplugins.style.zIndex = '120';
             var pluginslistinnerhtml = '<ul id="plgns_ul">';
         
         for(var currentplugin = 0; currentplugin < plugins.length; currentplugin++) {
-            pluginslistinnerhtml += `<li onclick="pluginnames = delMsvElem(['`+pluginnames+`'], '`+pluginnames[currentplugin]+`'); plugins = delMsvElem(['`+plugins+`'], '`+plugins[currentplugin]+`');remScript('`+plugins[currentplugin]+`');localStorage.setItem('plugins', JSON.stringify(plugins));this.remove(); if(plgns_ul.innerHTML==''){ noplgns.style.display = 'block'}; errors_connected.innerHTML = 'Для применения изменений требуется обновление страницы <button onclick=\\'location.reload();\\'>обновить страницу</button>'"><p style="font-size:18px">` + pluginnames[currentplugin] + `</p><p style="font-size:14px">` + (plugins[currentplugin].startsWith('data:text/javascript;base64,') ? 'Через файл' : plugins[currentplugin]) + `</p></li>`;
+            pluginslistinnerhtml += `<li onclick="pluginnames = delMsvElem(['`+pluginnames+`'], '`+pluginnames[currentplugin]+`'); plugins = delMsvElem(['`+plugins+`'], '`+plugins[currentplugin]+`');remScript('`+plugins[currentplugin]+`', ${/https?:\/\/api\.github\.com/.test(plugins[currentplugin])});localStorage.setItem('plugins', JSON.stringify(plugins));this.remove(); if(plgns_ul.innerHTML==''){ noplgns.style.display = 'block'}; errors_connected.innerHTML = 'Для применения изменений требуется обновление страницы <button onclick=\\'location.reload();\\'>обновить страницу</button>'"><p style="font-size:18px">` + pluginnames[currentplugin] + `</p><p style="font-size:14px">` + (plugins[currentplugin].startsWith('data:text/javascript;base64,') ? 'Файл' : (plugins[currentplugin].startsWith('https://api.github.com') ? 'Онлайн' : plugins[currentplugin])) + `</p></li>`;
         }
         pluginslistinnerhtml += '</ul>'
         connectedPluginsUlElementContainer.innerHTML = pluginslistinnerhtml;
@@ -3025,12 +3069,61 @@ connectedplugins.style.zIndex = '120';
 
 
 
+// https://raw.githubusercontent.com/mpodosko/htmlnotepad-plugins/main/plugins.json
 
+// https://api.github.com/repos/mpodosko/htmlnotepad-plugins/git/blobs/bc2ad18fbac70d260c1fd50a7da7b5e2df58a326
 
+// https://api.github.com/repos/mpodosko/htmlnotepad-plugins/contents/plugins.json
 
+window.onerror = (err)=>{alert(err)}
+jspluginsonline.onclick = () => {
+            pluginsonline_cont.style.display = 'block';
 
+            pluginsonline.style.display = 'block';
 
+bodyel.style.filter = 'blur(2px)';
 
+pluginsonline_cont.style.zIndex = '120';
+
+pluginsonline.style.zIndex = '120';
+async function fetchOnlinePlugins(){try{
+let pluginsonlineresponse = await fetch('https://api.github.com/repos/mpodosko/htmlnotepad-plugins/contents/plugins.json');
+if(pluginsonlineresponse.ok){
+let pluginsonlinejson = await pluginsonlineresponse.json(); // читаем ответ в формате JSON
+let fetchedPlugins = JSON.parse(decodeURIComponent(escape(atob(pluginsonlinejson.content))));
+allplugins = fetchedPlugins;
+onlinepluginslist.innerHTML = '';
+for(let x=0;x<fetchedPlugins.length;x++){
+onlinepluginslist.innerHTML+=`<li ${plugins.includes(fetchedPlugins[x].url) ? 'style="color:#555"' : 'onclick="connectonlineplugin(\''+fetchedPlugins[x].url+'\');this.onclick=null;this.style.color=\'#555\';"'}><p style="font-size:18px">
+${fetchedPlugins[x].name}</p><p style="margin-top:-16px;">${fetchedPlugins[x].description}</p>
+</li>`;
+}}else{onlinepluginslist.innerHTML='<li>Произошла ошибка</li>';}}catch(errr){alert(errr)}}
+fetchOnlinePlugins();
+}
+async function connectonlineplugin(url){
+
+plugins.push(url);
+localStorage.setItem('plugins', JSON.stringify(plugins));
+
+let pscript1 = document.createElement('script');
+let resp = await fetch(url);
+let res = await resp.json();
+let resurl = res.content;
+pscript1.src = 'data:text/javasript;base64,'+resurl;
+pscript1.setAttribute('online-url', url);
+body.append(pscript1);
+
+}
+pluginsonlineclose1.onclick = () => {
+pluginsonline.style.display = 'none';
+            pluginsonline_cont.style.display = 'none';
+
+           bodyel.style.filter = 'none'
+
+           pluginsonline_cont.style.zIndex = '-1';
+
+           pluginsonline.style.zIndex = '-1';
+}
 
 
     document.addEventListener('keydown', function(event) {
@@ -3061,6 +3154,27 @@ savedialog_cont.style.zIndex = '120';
 savedialog.style.zIndex = '120';
   }
 });
+var allplugins;
+pluginsearch.oninput = () => {
+onlinepluginslist.innerHTML = '';
+if(pluginsearch.value == '') {
+for(let x=0;x<allplugins.length;x++){
+onlinepluginslist.innerHTML+=`<li ${plugins.includes(allplugins[x].url) ? 'style="color:#555"' : 'onclick="connectonlineplugin(\''+allplugins[x].url+'\');this.onclick=null;this.style.color=\'#555\';"'}><p style="font-size:18px">
+${allplugins[x].name}</p><p style="margin-top:-16px;">${allplugins[x].description}</p>
+</li>`;
+}} else {
+let foundplugins = allplugins.filter((el) => el.name.toLowerCase().includes(pluginsearch.value.toLowerCase()));
+if(foundplugins.length == 0){
+onlinepluginslist.innerHTML='<li>Ничего не найдено</li>';
+} else {
+for(let x=0;x<foundplugins.length;x++){
+onlinepluginslist.innerHTML+=`<li ${plugins.includes(foundplugins[x].url) ? 'style="color:#555"' : 'onclick="connectonlineplugin(\''+foundplugins[x].url+'\');this.onclick=null;this.style.color=\'#555\';"'}><p style="font-size:18px">
+${foundplugins[x].name}</p><p style="margin-top:-16px;">${foundplugins[x].description}</p>
+</li>`;
+}
+}
+}
+}
 
 
 
@@ -3069,7 +3183,7 @@ savedialog.style.zIndex = '120';
 
 
 
-
+// tape
 
 
 
@@ -3082,7 +3196,7 @@ resetSettings.onclick = () => {
 
 
 
-
+// i use panasonic rx-c37l btw
 
 
     
